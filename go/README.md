@@ -4,8 +4,12 @@ Table of Contents
 =================
 
    * [Go](#go)
+   * [Table of Contents](#table-of-contents)
       * [Why Go?](#why-go)
-      * [Advantages:](#advantages)
+         * [runs fast](#runs-fast)
+         * [garbage collection](#garbage-collection)
+         * [simpler object](#simpler-object)
+         * [efficient concurrency](#efficient-concurrency)
       * [Charactristics of Go](#charactristics-of-go)
          * [workspace &amp; packages](#workspace--packages)
          * [go tool](#go-tool)
@@ -14,7 +18,7 @@ Table of Contents
          * [Pointers](#pointers)
          * [Variable Scope](#variable-scope)
          * [Deallocating Memory](#deallocating-memory)
-         * [Garbage Collection](#garbage-collection)
+         * [Garbage Collection](#garbage-collection-1)
          * [Comments](#comments)
          * [Printing format strings](#printing-format-strings)
          * [Type Conversions](#type-conversions)
@@ -26,18 +30,15 @@ Table of Contents
          * [Constants](#constants)
          * [iota -](#iota--)
          * [Control flow](#control-flow)
-         * [Composite data types](#composite-data-types)
+      * [Composite data types](#composite-data-types)
          * [Slices](#slices)
          * [Variable Slices](#variable-slices)
          * [Maps](#maps)
          * [Structs](#structs)
 
+## Why Go? 
 
-## Why Go?
-
-## Advantages:
-
-1. **runs fast.**
+### runs fast
 
   Machine language. Assembly language. High level language.
 
@@ -47,11 +48,11 @@ Table of Contents
 
   Go is a good compromise between compiled vs interpreted. 
 
-2. **garbage collection.**
+### garbage collection
 
   efficient, automatic garbage collection.
 
-3. **simpler object.** 
+### simpler object
 
   Weakly object oriented. 
 
@@ -59,7 +60,7 @@ Table of Contents
 
   No inheritance, constructors, generics.
 
-4. **efficient concurrency.** 
+### efficient concurrency
 
   Goroutines - thread
 
@@ -293,7 +294,7 @@ const (
 
 
 
-### Composite data types
+## Composite data types
 
 Arrays
 
