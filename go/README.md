@@ -182,33 +182,42 @@ var x *int = &y
 
 #### Unicode Package. 
 
-​    IsDigit(r rune)
-
-​    IsSpace(r rune)
-
-​    IsLetter(r rune)
-
-​    IsLower(r rune)
-
-​    IsPunct(r rune)
-
-​    ToUpper(r rune) // conversion
-
-​    ToLower(r rune) // conversion
+``` go
+IsDigit(r rune)
+IsSpace(r rune)
+IsLetter(r rune)
+IsLower(r rune)
+IsPunct(r rune)
+ToUpper(r rune) // conversion
+ToLower(r rune) // conversion
+```
 
 
 
 ####   Strings Package
 
-​    Compare(a, b), Contains(a, b), HasPrefix(s, prefix), Index(s, substr)
+``` go
+Compare(a, b)
+Contains(a, b)
+HasPrefix(s, prefix)
+Index(s, substr)
 
-​    Replace(), ToLower(s), ToUpper(s), TrimSpace(s): return a new string.
+Replace()
+ToLower(s) 
+ToUpper(s) 
+TrimSpace(s) // return a new string.
+```
 
 
 
-  #### Strconv Package
+#### Strconv Package
 
-​    Atoi(s), Itoa(s), FormatFloat(), ParseFloat()
+```    go
+ Atoi(s) 
+ Itoa(s) 
+ FormatFloat() 
+ ParseFloat()
+```
 
 
 
@@ -223,8 +232,6 @@ var x *int = &y
 ​    used when representing a property which has distinct possible values. Like enum.
 
 ​    Constants must be different but actual value is not important.
-
-
 
 ```go
 type Grades int
@@ -287,8 +294,6 @@ for i, v range x {
 
 
 
-  
-
 #### Slices
 
   A window on an underlying array
@@ -301,33 +306,23 @@ for i, v range x {
 
   Capacity is max number of elements. cap() 
 
-  
+``` go
+arr := [...]string{"a", "b", "c", "d", "e", "f", "g"}
 
-  arr := [...]string{"a", "b", "c", "d", "e", "f", "g"}
+s1 := arr[1:3] (includes 1, excludes 3)
+s2 := arr[2:5]
 
-  s1 := arr[1:3] (includes 1, excludes 3)
-
-  s2 := arr[2:5]
-
-
-
-  len(s1) // 2
-
-  cap(s1) // 6
-
-
+len(s1) // 2
+cap(s1) // 6
+```
 
   writing to a slice changes underlying array
 
-  
-
   Slice Literals - Creates the underlying array and creates a slice. Slice points to the start of the array, length is capacity.
 
-
-
-  sli := []int{1, 2, 3}
-
-
+```   go
+sli := []int{1, 2, 3}
+```
 
 
 
@@ -339,15 +334,11 @@ for i, v range x {
 
   it initializes to zero values
 
-
-
+``` go
   sli = make([]int, 10)
-
-
+```
 
   make() with 3 args: type, length, capacity
-
-
 
   append() adds elements to the end of a slice, 
 
@@ -355,11 +346,10 @@ for i, v range x {
 
   increases size of array if necessary
 
-
-
-  sli = make([]int, 0, 3)
-
-  sli = append(sli, 100)  //
+``` go
+sli = make([]int, 0, 3)
+sli = append(sli, 100) 
+```
 
 
 
@@ -369,102 +359,59 @@ for i, v range x {
 
   Advantage: can use arbitrary key. i.e. slices, arrays
 
-
-
   make() to create a map
 
-
-
+```go
   var idMap map[string][int] // key type, value type
-
   idMap = make(map[string]int)
+```
 
+Map literal
 
-
-  Map literal
-
-
-
+``` go
   idMap := map[string]int {
-
-​    "joe": 123
-
+    "joe": 123
   }
+```
 
+``` go
+idMap["hayley"] // Accessing Maps. Returns zero if key is not present.
+idMap["hayley"] = 4 // Adding a k,v pair
+delete(idMap, "hayley") // Deleting a k,v pair
+id, p := idMap["joe"]  // two-value assignment. id is value, p is presence boolean of key
+len(idMap) // returns number of elements
 
-
-  Accessing Maps. Returns zero if key is not present.
-
-
-
-  idMap["hayley"]
-
-
-
-  Adding a k,v pair
-
-
-
-  idMap["hayley"] = 4
-
-
-
-  Deleting a k,v pair
-
-
-
-  delete(idMap, "hayley")
-
-
-
-  two-value assignment
-
-
-
-  id, p := idMap["joe"]  // id is value, p is presence boolean of key
-
-
-
-  len(idMap) // returns number of elements
-
-
-
-  // iterating through a map use a for loop
-
-  for key, val := range idMap {
-
-​    
-
-  }
+// iterating through a map use a for loop
+for key, val := range idMap {
+}
+```
 
 
 
 #### Structs
 
-  Aggregate data type.
+Aggregate data type.
 
-
-
+``` go
   type struct Person {
-
-​    name string
-
-​    address string
-
-​    phone string
-
+     name string
+     address string
+     phone string
   }
 
-
-
   var hayley Person
-
   hayley.name = "hayley z"
-
   x = hayley.address
 
-
-
   p1 := new(Person) // initialize fields to zero
-
   p1 := Person(name: "Hayley", address: "a st.", phone: "123") // struct literal
+```
+
+
+
+
+
+
+
+
+
