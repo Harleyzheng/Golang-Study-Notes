@@ -1,3 +1,65 @@
+Table of Contents
+
+=================
+
+
+
+  \* [Go](#go)
+
+   \* [Why Go?](#why-go)
+
+   \* [Advantages:](#advantages)
+
+   \* [Charactristics of Go](#charactristics-of-go)
+
+​     \* [workspace &amp; packages](#workspace--packages)
+
+​     \* [go tool](#go-tool)
+
+​     \* [Variables](#variables)
+
+​     \* [Type](#type)
+
+​     \* [Pointers](#pointers)
+
+​     \* [Variable Scope](#variable-scope)
+
+​     \* [Deallocating Memory](#deallocating-memory)
+
+​     \* [Garbage Collection](#garbage-collection)
+
+​     \* [Comments](#comments)
+
+​     \* [Printing format strings](#printing-format-strings)
+
+​     \* [Type Conversions](#type-conversions)
+
+​     \* [Encoding](#encoding)
+
+​     \* [String](#string)
+
+​     \* [Unicode Package.](#unicode-package)
+
+​     \* [Strings Package](#strings-package)
+
+​     \* [Strconv Package](#strconv-package)
+
+​     \* [Constants](#constants)
+
+​     \* [iota -](#iota--)
+
+​     \* [Control flow](#control-flow)
+
+​     \* [Composite data types](#composite-data-types)
+
+​     \* [Slices](#slices)
+
+​     \* [Variable Slices](#variable-slices)
+
+​     \* [Maps](#maps)
+
+​     \* [Structs](#structs)
+
 # Go
 
 ## Why Go?
