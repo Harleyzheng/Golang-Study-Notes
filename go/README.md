@@ -2,7 +2,7 @@
 
 ## Why Go?
 
-#### Advantages:
+## Advantages:
 
 1. **runs fast.**
 
@@ -38,7 +38,7 @@
 
 ## Charactristics of Go
 
-#### workspace & packages
+### workspace & packages
 
   Directory hierarchy. src, pkg, bin.. (can be customized)
 
@@ -54,7 +54,7 @@
 
 
 
-#### go tool
+### go tool
 
 ​    'import' used to access other packages. it searches directories specified by GOROOT and GOPATH.
 
@@ -62,7 +62,7 @@
 
 
 
-#### Variables
+### Variables
 
   declaration
 
@@ -76,7 +76,7 @@ x := 100 // x not declared yet
 
  
 
-#### Type
+### Type
 
   define alias for a type
 
@@ -84,7 +84,7 @@ x := 100 // x not declared yet
 
 
 
-#### Pointers
+### Pointers
 
   is an address to data in memory
 
@@ -102,7 +102,7 @@ var x *int = &y
 
 
 
-#### Variable Scope
+### Variable Scope
 
   blocks - universe block, package block, file block, if/else
 
@@ -116,7 +116,7 @@ var x *int = &y
 
 
 
-#### Deallocating Memory
+### Deallocating Memory
 
   heap - is persistent.
 
@@ -126,7 +126,7 @@ var x *int = &y
 
 
 
-#### Garbage Collection
+### Garbage Collection
 
   garbade collection runs in the background. (trade off with performance)
 
@@ -134,7 +134,7 @@ var x *int = &y
 
 
 
-#### Comments
+### Comments
 
   single line: //
 
@@ -142,7 +142,7 @@ var x *int = &y
 
 
 
-#### Printing format strings
+### Printing format strings
 
   import from fmt package. 
 
@@ -152,7 +152,7 @@ var x *int = &y
 
 
 
-#### Type Conversions
+### Type Conversions
 
   T():
 
@@ -164,7 +164,7 @@ var x *int = &y
 
 
 
-#### Encoding
+### Encoding
 
   UTF-8. Unicode. 
 
@@ -174,13 +174,13 @@ var x *int = &y
 
 
 
-#### String
+### String
 
   String. Each byte is a Rune. Immutable. 
 
 
 
-#### Unicode Package. 
+### Unicode Package. 
 
 ``` go
 IsDigit(r rune)
@@ -194,7 +194,7 @@ ToLower(r rune) // conversion
 
 
 
-####   Strings Package
+### Strings Package
 
 ``` go
 Compare(a, b)
@@ -210,7 +210,7 @@ TrimSpace(s) // return a new string.
 
 
 
-#### Strconv Package
+### Strconv Package
 
 ```    go
  Atoi(s) 
@@ -221,13 +221,13 @@ TrimSpace(s) // return a new string.
 
 
 
-#### Constants
+### Constants
 
   Expression whose value is known at compile time. Type is inferred from righthand side.
 
 
 
-####  iota - 
+### iota - 
 
 ​    used when representing a property which has distinct possible values. Like enum.
 
@@ -244,7 +244,7 @@ const (
 
 ​    
 
-#### Control flow
+### Control flow
 
   if,
 
@@ -260,7 +260,7 @@ const (
 
 
 
-#### Composite data types
+### Composite data types
 
 Arrays
 
@@ -294,7 +294,7 @@ for i, v range x {
 
 
 
-#### Slices
+### Slices
 
   A window on an underlying array
 
@@ -326,7 +326,7 @@ sli := []int{1, 2, 3}
 
 
 
-#### Variable Slices
+### Variable Slices
 
   make(). Create a slice (and array)
 
@@ -353,7 +353,7 @@ sli = append(sli, 100)
 
 
 
-#### Maps 
+### Maps 
 
   Hash Tables concepts same as other languages
 
@@ -388,7 +388,7 @@ for key, val := range idMap {
 
 
 
-#### Structs
+### Structs
 
 Aggregate data type.
 
