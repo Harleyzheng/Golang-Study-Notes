@@ -360,23 +360,23 @@ sli := []int{1, 2, 3}
 
 ### Variable Slices
 
-  make(). Create a slice (and array)
+make(). Create a slice (and array)
 
-  make() with 2 args: type, length/capacity
+make() with 2 args: type, length/capacity
 
-  it initializes to zero values
+it initializes to zero values
 
 ``` go
-  sli = make([]int, 10)
+sli = make([]int, 10)
 ```
 
-  make() with 3 args: type, length, capacity
+make() with 3 args: type, length, capacity
 
-  append() adds elements to the end of a slice, 
+append() adds elements to the end of a slice, 
 
-  it inserts into underlying array
+it inserts into underlying array
 
-  increases size of array if necessary
+increases size of array if necessary
 
 ``` go
 sli = make([]int, 0, 3)
@@ -387,18 +387,18 @@ sli = append(sli, 100)
 
 ### Maps 
 
-  Hash Tables concepts same as other languages
+Hash Tables concepts same as other languages
 
-  Advantage: can use arbitrary key. i.e. slices, arrays
+Advantage: can use arbitrary key. i.e. slices, arrays
 
-  make() to create a map
+**make() to create a map**
 
 ```go
   var idMap map[string][int] // key type, value type
   idMap = make(map[string]int)
 ```
 
-Map literal
+**Map literal**
 
 ``` go
   idMap := map[string]int {
@@ -425,7 +425,7 @@ for key, val := range idMap {
 Aggregate data type.
 
 ``` go
-  type struct Person {
+  type Person struct {
      name string
      address string
      phone string
@@ -436,14 +436,296 @@ Aggregate data type.
   x = hayley.address
 
   p1 := new(Person) // initialize fields to zero
-  p1 := Person(name: "Hayley", address: "a st.", phone: "123") // struct literal
+	p1 := Person{name: "Hayley", address: "a st.", phone: "123"} // struct literal
 ```
 
 
 
+# Communication Protocols & Formats
+
+### Packages for RFCs
+
+Functions with encode and decode protocol format
+
+For example "net/http" "net" 
+
+**JSON Marshalling  & Unmarshalling**
+
+``` go
+p1 := Person(name: "hayley", address: "home")
+jsonObject, err := json.Marshal(p1) // jsonObject is a []byte
+var p2 Person
+err := json.Unmarshal(jsonObject, &p2) // 
+```
+
+**Files**. File access are linear access. 
+
+**Basic Operations**
+
+	1. Open - Get handle for access
+ 	2. Read - read bytes into []byte
+ 	3. Write - write []byte into file
+ 	4. Close - Release handle
+ 	5. Seek - move read/write head
+
+**"io/ioutil"**
+
+``` go
+dat, e := ioutil.ReadFile("test.txt")  // dat is []byte with contens of entire file
+// Large files may cause a memory problem
+
+err := ioutil.WriteFile("test.txt", "Hello", 0777) // Create, dump everything to file. 0777 is permission bytes for everyone
+```
+
+**"os"**
+
+``` go
+os.Open() // opens a file, returns a file descriptor
+os.Close() // close a file
+os.Read() // reads from a file into []byte, and fills the []byte. Control the amount read.
+os.Write() // write
+
+// Opening and reading
+f, err := os.Open("dt.txt")
+byteArray := make([]byte, 10)
+numBytesRead, err := f.Read(byteArray) // returns number of bytes read, maybe less than []byte
+f.Close()
+
+// Create/Write
+
+f, err := os.Create("outfile.txt")
+
+byteArray := []byte{1, 2, 3}
+nb, err := f.Write(byteArray)
+nb, err := f.WriteString("hi Hayley")
+```
 
 
 
+# Function
+
+main() is called immediately. 
+
+Parameters are defined in function declaration. Arguements are passed in function calls.
+
+**Multiple return values**
+
+``` go
+func foo(x int) (int, int) {
+  return x, x + 1;
+}
+a, b := foo(3)
+```
+
+**Call by Value**
+
+Passed arguments are copied parameters.
+
+- Advantage: Data Encapsulation
+
+- Disadvantage: Large objects may take a long time to copy.
+
+**Call by Reference**
+
+``` go
+func foo(x *int) {
+	*x = *x + 1
+}
+x := 2
+foo(&x)
+```
+
+- Advantage: Don't need to copy arguments. 
+- Disadvantage:  Data Encapsulation
+
+**Passing Arrays**
+
+Call by value - Array arguments are copied
+
+Pass array pointers - (**NOT the neat way in Go)**
+
+``` go
+func foo(x *[3]int) {
+	(*x)[0] = (*x)[0] + 1
+}
+x := [3]int{1,2,3}
+foo(&x)
+```
+
+Instead, pass Slices instead. Passing a slice copies the pointer.
+
+``` go
+func foo(sli int) int {
+	sli[0] = sli[0] + 1
+}
+x := [3]int{1,2,3}
+foo(x)
+```
 
 
+
+# Function Types
+
+**First-Class Values**
+
+Functions are first-class. Can be treated like other types.
+
+Can be created dynamically. Can be passed as arguments and returned as values.
+
+Can be stored in data structures.
+
+**Declare a variable as a function**
+
+```go
+var funcVar func(int) int 
+func incFn(x int) int {
+	return x + 1
+}
+func main() {
+	funcVar = incFn
+}
+```
+
+**Functions as Arguments**
+
+```go
+func applyIt(aFunc func (int) int, val int) {
+	return aFunc(val)
+}
+```
+
+**Anonymout Functions**
+
+```go
+applyIt(func (x int) int {return x + 1}, 2)
+```
+
+**Returning Functions**
+
+```go
+getFunc() func (x int) int {
+	return func (x int) int {return x + 1}
+}
+```
+
+**Closure**
+
+When passing a function, the function and its environment are also passed. Just like Javascript.
+
+**Variable Argument Number**
+
+```go
+func getMax(vals ...int) int {  // vals is treated as a slice
+
+}
+```
+
+**Variadic Slice Argument**
+
+```go
+func main() {
+	getMax(slice...)
+}
+```
+
+**Deferred Function Calls** - Typically used for cleanup activities
+
+**Arguments of a deferred call are evaluated right away**
+
+```
+
+```
+
+
+
+# Classeses
+
+**Receiver Type**
+
+```go
+type MyInt int
+
+// Method (Double) has a receiver type **(mi MyInt)** that it's associated with. 
+func (mi MyInt) Double () int {
+	return int(mi*2)
+}
+
+func main() {
+  v := MyInt(3)
+  v.Double() // v is passed by value as an argument to Double here
+}
+```
+
+**Implict Method Argument**
+
+Receiver Type is commonly a struct. 
+
+```go
+type Point struct {
+  x float64
+  y float64
+}
+
+func (p Point) DistToOrig() {
+  t := math.Pow(p.x, 2) + main.Pow(p.y, 2)
+  return math.Sqrt(t)
+}
+
+func main() {
+  p1 := Point{3, 4}
+  fmt.Println(p1.DistToOrig()) // p1 implicitly pass to the function
+}
+```
+
+# Encapsulation
+
+**Controlling Package Access** 
+
+**public functions**
+
+```go
+// file 1
+package data
+var x int=1
+func PrintX() {fmt.Println(x)}
+
+// file 2
+package main
+import "data"
+func main() {
+	data.PrintX()
+}
+```
+
+**Structs** with public functions
+
+``` go
+package data
+
+type Point struct {
+  x float64  // hidden
+  y float64  // hidden
+}
+
+func (p *Point) InitMe (xn, yn float64) {
+  p.x = xn // no need to dereference p
+  p.y = yn
+}
+
+```
+
+**Pointer Receivers**
+
+Because receivers are passed in by value, the actual value cannot by changed. Another problem is receivers could be large. We can pass a pointer to address both problems. 
+
+**When using pointer receivers, no need to dereference inside the method, and no need to reference when calling the method.**
+
+Good practice. Either all methods use pointer receivers, or none of the methods use pointer receivers.
+
+```go
+func main() {
+  p := Point(x, y)
+  p.InitMe(2,4) // no need to reference p
+}
+```
 
