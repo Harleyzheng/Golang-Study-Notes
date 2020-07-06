@@ -6,12 +6,12 @@ Table of Contents
    * [Go](#go)
    * [Table of Contents](#table-of-contents)
    * [Why Go?](#why-go)
-      * [runs fast](#runs-fast)
-      * [garbage collection](#garbage-collection)
-      * [simpler object](#simpler-object)
-      * [efficient concurrency](#efficient-concurrency)
+      * [Runs fast](#runs-fast)
+      * [Garbage collection](#garbage-collection)
+      * [Simpler object](#simpler-object)
+      * [Efficient concurrency](#efficient-concurrency)
    * [Charactristics of Go](#charactristics-of-go)
-      * [workspace &amp; packages](#workspace--packages)
+      * [Workspace &amp; Packages](#workspace--packages)
       * [go tool](#go-tool)
       * [Variables](#variables)
       * [Type](#type)
@@ -50,7 +50,7 @@ Table of Contents
 
 # Why Go? 
 
-## runs fast
+## Runs fast
 
   Machine language. Assembly language. High level language.
 
@@ -60,11 +60,11 @@ Table of Contents
 
   Go is a good compromise between compiled vs interpreted. 
 
-## garbage collection
+## Garbage collection
 
   efficient, automatic garbage collection.
 
-## simpler object
+## Simpler object
 
   Weakly object oriented. 
 
@@ -72,7 +72,7 @@ Table of Contents
 
   No inheritance, constructors, generics.
 
-## efficient concurrency
+## Efficient concurrency
 
   Goroutines - thread
 
@@ -82,7 +82,7 @@ Table of Contents
 
 # Charactristics of Go
 
-## workspace & packages
+## Workspace & packages
 
   Directory hierarchy. src, pkg, bin.. (can be customized)
 
