@@ -1,5 +1,7 @@
 # Go
 
+This reprository summarizes the content of the Coursera "[Programming with Google Go Specialization](https://www.coursera.org/specializations/google-golang)" in an experienced programmer's perspective. It highlights new concepts and key differences in Go that are new to programmers fluent in other languages (such as Typescript/C#). 
+
 Table of Contents
 =================
 
