@@ -1,16 +1,17 @@
 # Go
 
+
 Table of Contents
 =================
 
    * [Go](#go)
    * [Table of Contents](#table-of-contents)
-      * [Why Go?](#why-go)
+   * [Why Go?](#why-go)
          * [runs fast](#runs-fast)
          * [garbage collection](#garbage-collection)
          * [simpler object](#simpler-object)
          * [efficient concurrency](#efficient-concurrency)
-      * [Charactristics of Go](#charactristics-of-go)
+   * [Charactristics of Go](#charactristics-of-go)
          * [workspace &amp; packages](#workspace--packages)
          * [go tool](#go-tool)
          * [Variables](#variables)
@@ -27,10 +28,11 @@ Table of Contents
          * [Unicode Package.](#unicode-package)
          * [Strings Package](#strings-package)
          * [Strconv Package](#strconv-package)
+         * [iota](#iota)
          * [Constants](#constants)
-         * [iota -](#iota--)
          * [Control flow](#control-flow)
-      * [Composite data types](#composite-data-types)
+   * [Composite data types](#composite-data-types)
+         * [Arrays](#arrays)
          * [Slices](#slices)
          * [Variable Slices](#variable-slices)
          * [Maps](#maps)
@@ -41,8 +43,13 @@ Table of Contents
    * [Function Types](#function-types)
    * [Classeses](#classeses)
    * [Encapsulation](#encapsulation)
+   * [Polymorphism](#polymorphism)
+   * [Concurrency](#concurrency)
+      * [Goroutine Communication](#goroutine-communication)
+      * [Mutual Exclusion](#mutual-exclusion)
 
-## Why Go? 
+
+# Why Go? 
 
 ### runs fast
 
@@ -74,9 +81,7 @@ Table of Contents
 
   Select
 
-
-
-## Charactristics of Go
+# Charactristics of Go
 
 ### workspace & packages
 
@@ -194,13 +199,11 @@ var x *int = &y
 
 ### Type Conversions
 
-  T():
-
-​    var x int32 = 1
-
-​    var y int16 = 2
-
-​    x = int32(y)
+``` go
+ var x int32 = 1
+ var y int16 = 2
+ x = int32(y)
+```
 
 
 
@@ -216,7 +219,7 @@ var x *int = &y
 
 ### String
 
-  String. Each byte is a Rune. Immutable. 
+  String. Each byte is a Rune. **Immutable**. 
 
 
 
@@ -259,15 +262,7 @@ TrimSpace(s) // return a new string.
  ParseFloat()
 ```
 
-
-
-### Constants
-
-  Expression whose value is known at compile time. Type is inferred from righthand side.
-
-
-
-### iota - 
+### iota
 
 ​    used when representing a property which has distinct possible values. Like enum.
 
@@ -282,27 +277,27 @@ const (
 )
 ```
 
-​    
+### Constants
+
+  Expression whose value is known at compile time. Type is inferred from righthand side.
+
+### 
 
 ### Control flow
 
-  if,
+if, for loop, for i < 10 {}, for
 
-  for loop, for i < 10 {}, for
+switch (auto break at each case. no **fall through**.)
 
-  switch (auto break at each case. no fall through.)
+tagless switch. first true case is executed.
 
-  tagless switch. first true case is executed.
+break, continue. same as c++.
 
-  break, continue. same as c++.
+Scan reads user input and is blocking. 
 
-  Scan reads user input and is blocking. 
+# Composite data types
 
-
-
-## Composite data types
-
-Arrays
+### Arrays
 
   fixed length. 
 
@@ -737,3 +732,298 @@ func main() {
 }
 ```
 
+# Polymorphism 
+
+Identical at high level of abstraction.
+
+Different at a low level of abstractions.
+
+i.e. Area() for different object.
+
+Go does not have **inheritance**
+
+**Interface**
+
+```go
+type Speaker interface {
+	Speak()
+	Name() string
+}
+
+type Dog struct {
+  name string
+}
+
+func (d Dog) Speak() {
+  fmt.Println(d.name)
+}
+
+func main() {
+  var s1 Speak
+  var d1 Dog{"Brian"}
+  s1 = d1 // because Dog satisfy the interface
+  
+  var d2 *Dog
+  s1 = d1 // An interface can have a nil dynamic value
+}
+```
+
+**Handle Nil Dynamic Value**
+
+Can still call the Speak() method of s1.
+
+Need to check inside the method. 
+
+```go
+func (d *Dog) Speak() {
+	if d == nil {
+		fmt.Println("noise")
+	} else {
+	  fmt.Println(d.name)
+	}
+}
+```
+
+**Can pass in interface as arguement.**
+
+**Type Assertion**
+
+```go
+type Shape interface { ... }
+type Rectangle struct { ... }
+func DrawShape(s Shape) {
+  rect, ok := s.(Rectangle)
+  if ok {
+    // s is a rectangle
+  }
+  
+  // or use a switch
+  switch := sh := s.(type) {
+  case Rectangle: 
+    // do sth
+  }
+}
+```
+
+**Handling Errors**
+
+``` go
+f, err := os.Open("file.txt")
+if err != nil {
+  fmt.Println(err) // err is an instance of Error interface that has function Error()
+	return
+}
+```
+
+# Concurrency
+
+**Concurrent vs Parallel**
+
+Two tasks:
+
+Concurrent: Start and end times overlaps. May be executed on the same core.
+
+Parallel: executes at exactly the same time
+
+**Process** **vs Threads**
+
+Threads share some context (virtual memory, file descriptors)
+
+Switching between threads is much faster than between processes.
+
+**Goroutines**
+
+Multiple goroutinges running under a thread.
+
+Go runtime scheduler. Schedules goroutines inside an OS thread.
+
+**Create**
+
+```go
+go foo() // does not block
+```
+
+**Exit**. A goroutine exits when its code is complete.
+
+**When the main goroutine is completes, all other goroutines are forced to exit**
+
+**Delayed Exit** by adding a delay is bad.
+
+**Synchronization** 
+
+Use **global events** to resrict bad interleavings. Global event is viewed by all tasks at the same time.
+
+**Sync package** contains functions to synchronize between goroutines.
+
+**Sync WaitGroup** Foces a gorouting to wait for other goroutines. It contains an internal counter. Increment counter for each goroutine to wait for. Decrement counter when each goroutine completes. Waiting goroutine cannot continue until counter is 0.
+
+```go
+var wg sync.WaitGroup
+wg.Add(1) // increments the counter
+wg.Wait() // blocks until counter = 0 
+wg.Done() // decrements the counter
+```
+
+Example:
+
+```go
+func foo(wg *sync.WaitGroup) {
+	// do sth first
+	wg.Done()
+}
+
+func main() {
+  var wg sync.WaitGroup
+  wg.Add(1)
+  go foo(&wg)
+  wg.Wait()
+  // do sth later
+}
+```
+
+## Goroutine Communication
+
+**Channels** 
+
+- Transfer data between goroutines
+
+- Channels are typed
+
+- Use make() to create a channel
+
+  ``` go
+  c := make(chan int)
+  ```
+
+- Use <- to send and receive data
+
+- Send data on a channel
+
+  ``` go
+  c <- 3
+  ```
+
+- Receive data from a channel
+
+  ```go
+  x := <- c
+  ```
+
+  Example
+
+  ```go
+  func prod(v1 int, v2 int, c chan int) {
+  	c <- v1 * v2
+  }
+  
+  func main() {
+  	c := make(chan int)
+  	go prod(1, 2, c)
+  	go prod(3, 4, c)
+  	a := <- c
+  	b := <- c
+  	fmt.Println(a*b)
+  }
+  ```
+
+**Blocking Channel**
+
+Channel communication is synchronous
+
+Blocking is built in. 
+
+**Sending blocks until data is received.**
+
+**Receiving blocks until data is sent.**
+
+**Channel Capacity**
+
+Default size 0 (unbuffered). Unbuffered channels cannot hold data in transit.
+
+```go
+c := make(chan int, 3)
+```
+
+**Sending only blocks if buffer is full.**
+
+**Receiving only blocks if buffer is empty**
+
+Use of Buffering. Sender and receive do not need to operate at exactly the same speed.
+
+**It's common to iteratively read from a channel, until the channel is closed**
+
+```go
+for i := range c { // infinite loop
+	fmt.Println(i)
+}
+
+// another gorouting - close the infinite loop
+close(c)
+```
+
+**Receiving from Multiple Goroutines (Channels)**
+
+- first come first served. wait on the first data from a set of channels
+
+  ```go
+  select {
+    case a = <- c1:
+      // do sth with a
+    case b = <- c2:
+      // do sth with b
+  }
+  ```
+
+Select send or receive, whichever is first possible
+
+``` go
+select {
+  case a = <- c1:
+    // do sth with a
+  case outchannel <- b:
+   // sent b
+}
+```
+
+Select with an Abort Channel.
+
+```go
+for { // infinite loop until something is send in abort channel
+  select {
+ 		case a <- c:
+    // process a
+    case <-abort:
+    	return
+  }
+}
+```
+
+Select with a default, non-blocking channel.
+
+## Mutual Exclusion
+
+**Mutex**
+
+```go
+var mutex sync.Mutex
+mutex.Lock()  // **blocks !**
+mutex.Unlock() // a blocked Lock() can proceed
+```
+
+**Initialization Once**
+
+```go
+var once sync.Once
+once.Do(f) // f is called at multiple places and f is executed only one time
+// all calls to once.Do() block until the first returns. to ensure that initialization executes first. For example, calling once.Do() in front of all files to setup something.
+```
+
+**Deadlock**
+
+From synchronization depedencies, for example circular dependencies. 
+
+**Go runtime auto detects when all goroutines are deadlocked**
+
+**Cannot detect when a subset of goroutines are deadlocked.**
+
+Dining philosopher solution: Each philosopher picks up lowest numbered chopstick first.
