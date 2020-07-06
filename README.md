@@ -1,44 +1,43 @@
 # Go
 
-
 Table of Contents
 =================
 
    * [Go](#go)
    * [Table of Contents](#table-of-contents)
    * [Why Go?](#why-go)
-         * [runs fast](#runs-fast)
-         * [garbage collection](#garbage-collection)
-         * [simpler object](#simpler-object)
-         * [efficient concurrency](#efficient-concurrency)
+      * [runs fast](#runs-fast)
+      * [garbage collection](#garbage-collection)
+      * [simpler object](#simpler-object)
+      * [efficient concurrency](#efficient-concurrency)
    * [Charactristics of Go](#charactristics-of-go)
-         * [workspace &amp; packages](#workspace--packages)
-         * [go tool](#go-tool)
-         * [Variables](#variables)
-         * [Type](#type)
-         * [Pointers](#pointers)
-         * [Variable Scope](#variable-scope)
-         * [Deallocating Memory](#deallocating-memory)
-         * [Garbage Collection](#garbage-collection-1)
-         * [Comments](#comments)
-         * [Printing format strings](#printing-format-strings)
-         * [Type Conversions](#type-conversions)
-         * [Encoding](#encoding)
-         * [String](#string)
-         * [Unicode Package.](#unicode-package)
-         * [Strings Package](#strings-package)
-         * [Strconv Package](#strconv-package)
+      * [workspace &amp; packages](#workspace--packages)
+      * [go tool](#go-tool)
+      * [Variables](#variables)
+      * [Type](#type)
+      * [Pointers](#pointers)
+      * [Variable Scope](#variable-scope)
+      * [Deallocating Memory](#deallocating-memory)
+      * [Garbage Collection](#garbage-collection-1)
+      * [Comments](#comments)
+      * [Printing format strings](#printing-format-strings)
+      * [Type Conversions](#type-conversions)
+      * [Encoding](#encoding)
+      * [String](#string)
+      * [Unicode Package.](#unicode-package)
+      * [Strings Package](#strings-package)
+      * [Strconv Package](#strconv-package)
          * [iota](#iota)
-         * [Constants](#constants)
-         * [Control flow](#control-flow)
+      * [Constants](#constants)
+      * [Control flow](#control-flow)
    * [Composite data types](#composite-data-types)
-         * [Arrays](#arrays)
-         * [Slices](#slices)
-         * [Variable Slices](#variable-slices)
-         * [Maps](#maps)
-         * [Structs](#structs)
+      * [Arrays](#arrays)
+      * [Slices](#slices)
+      * [Variable Slices](#variable-slices)
+      * [Maps](#maps)
+      * [Structs](#structs)
    * [Communication Protocols &amp; Formats](#communication-protocols--formats)
-         * [Packages for RFCs](#packages-for-rfcs)
+      * [Packages for RFCs](#packages-for-rfcs)
    * [Function](#function)
    * [Function Types](#function-types)
    * [Classeses](#classeses)
@@ -51,7 +50,7 @@ Table of Contents
 
 # Why Go? 
 
-### runs fast
+## runs fast
 
   Machine language. Assembly language. High level language.
 
@@ -61,11 +60,11 @@ Table of Contents
 
   Go is a good compromise between compiled vs interpreted. 
 
-### garbage collection
+## garbage collection
 
   efficient, automatic garbage collection.
 
-### simpler object
+## simpler object
 
   Weakly object oriented. 
 
@@ -73,7 +72,7 @@ Table of Contents
 
   No inheritance, constructors, generics.
 
-### efficient concurrency
+## efficient concurrency
 
   Goroutines - thread
 
@@ -83,7 +82,7 @@ Table of Contents
 
 # Charactristics of Go
 
-### workspace & packages
+## workspace & packages
 
   Directory hierarchy. src, pkg, bin.. (can be customized)
 
@@ -97,17 +96,13 @@ Table of Contents
 
 ​    building main package generates an executed program.
 
-
-
-### go tool
+## go tool
 
 ​    'import' used to access other packages. it searches directories specified by GOROOT and GOPATH.
 
 ​    'go build', 'go doc', 'go foramt', 'go get', 'go list', 'go run', 'go test'
 
-
-
-### Variables
+## Variables
 
   declaration
 
@@ -119,17 +114,13 @@ var a,b,c int
 x := 100 // x not declared yet
 ```
 
- 
-
-### Type
+## Type
 
   define alias for a type
 
   Uninitialized vars have a zero value. 0, "", etc
 
-
-
-### Pointers
+## Pointers
 
   is an address to data in memory
 
@@ -141,13 +132,9 @@ x := 100 // x not declared yet
 var x *int = &y 
 ```
 
-  
-
   new() creates a variable and returns a pointer to the variable
 
-
-
-### Variable Scope
+## Variable Scope
 
   blocks - universe block, package block, file block, if/else
 
@@ -159,9 +146,7 @@ var x *int = &y
 
 ​    \2. Bi >= Bj
 
-
-
-### Deallocating Memory
+## Deallocating Memory
 
   heap - is persistent.
 
@@ -169,25 +154,19 @@ var x *int = &y
 
   hard to determine when a variable is no longer used. i.e. a function returning a pointer.
 
-
-
-### Garbage Collection
+## Garbage Collection
 
   garbade collection runs in the background. (trade off with performance)
 
   Compiler determines stack vs heap.
 
-
-
-### Comments
+## Comments
 
   single line: //
 
   block /* */ /*
 
-
-
-### Printing format strings
+## Printing format strings
 
   import from fmt package. 
 
@@ -195,9 +174,7 @@ var x *int = &y
 
   fmt.Printf("my number %d", 12);
 
-
-
-### Type Conversions
+## Type Conversions
 
 ``` go
  var x int32 = 1
@@ -205,9 +182,7 @@ var x *int = &y
  x = int32(y)
 ```
 
-
-
-### Encoding
+## Encoding
 
   UTF-8. Unicode. 
 
@@ -215,15 +190,11 @@ var x *int = &y
 
   In Go, a code point is a Rune. 
 
-
-
-### String
+## String
 
   String. Each byte is a Rune. **Immutable**. 
 
-
-
-### Unicode Package. 
+## Unicode Package. 
 
 ``` go
 IsDigit(r rune)
@@ -235,9 +206,7 @@ ToUpper(r rune) // conversion
 ToLower(r rune) // conversion
 ```
 
-
-
-### Strings Package
+## Strings Package
 
 ``` go
 Compare(a, b)
@@ -251,9 +220,7 @@ ToUpper(s)
 TrimSpace(s) // return a new string.
 ```
 
-
-
-### Strconv Package
+## Strconv Package
 
 ```    go
  Atoi(s) 
@@ -277,13 +244,11 @@ const (
 )
 ```
 
-### Constants
+## Constants
 
-  Expression whose value is known at compile time. Type is inferred from righthand side.
+  Expression whose value is known at compile time. Type is inferred from righthand side. 
 
-### 
-
-### Control flow
+## Control flow
 
 if, for loop, for i < 10 {}, for
 
@@ -297,7 +262,7 @@ Scan reads user input and is blocking.
 
 # Composite data types
 
-### Arrays
+## Arrays
 
   fixed length. 
 
@@ -327,9 +292,7 @@ for i, v range x {
 }
 ```
 
-
-
-### Slices
+## Slices
 
   A window on an underlying array
 
@@ -359,9 +322,7 @@ cap(s1) // 6
 sli := []int{1, 2, 3}
 ```
 
-
-
-### Variable Slices
+## Variable Slices
 
 make(). Create a slice (and array)
 
@@ -386,9 +347,7 @@ sli = make([]int, 0, 3)
 sli = append(sli, 100) 
 ```
 
-
-
-### Maps 
+## Maps 
 
 Hash Tables concepts same as other languages
 
@@ -421,9 +380,7 @@ for key, val := range idMap {
 }
 ```
 
-
-
-### Structs
+## Structs
 
 Aggregate data type.
 
@@ -446,7 +403,7 @@ Aggregate data type.
 
 # Communication Protocols & Formats
 
-### Packages for RFCs
+## Packages for RFCs
 
 Functions with encode and decode protocol format
 
